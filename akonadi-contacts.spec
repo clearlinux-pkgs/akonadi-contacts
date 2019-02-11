@@ -5,26 +5,25 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : akonadi-contacts
-Version  : 18.08.0
-Release  : 2
-URL      : https://download.kde.org/stable/applications/18.08.0/src/akonadi-contacts-18.08.0.tar.xz
-Source0  : https://download.kde.org/stable/applications/18.08.0/src/akonadi-contacts-18.08.0.tar.xz
-Source99 : https://download.kde.org/stable/applications/18.08.0/src/akonadi-contacts-18.08.0.tar.xz.sig
+Version  : 18.12.2
+Release  : 3
+URL      : https://download.kde.org/stable/applications/18.12.2/src/akonadi-contacts-18.12.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/18.12.2/src/akonadi-contacts-18.12.2.tar.xz
+Source99 : https://download.kde.org/stable/applications/18.12.2/src/akonadi-contacts-18.12.2.tar.xz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0 LGPL-2.1
-Requires: akonadi-contacts-lib
-Requires: akonadi-contacts-data
-Requires: akonadi-contacts-license
-Requires: akonadi-contacts-locales
+Requires: akonadi-contacts-data = %{version}-%{release}
+Requires: akonadi-contacts-lib = %{version}-%{release}
+Requires: akonadi-contacts-license = %{version}-%{release}
+Requires: akonadi-contacts-locales = %{version}-%{release}
 BuildRequires : akonadi-dev
-BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : kcontacts-dev
 BuildRequires : kmime-dev
 BuildRequires : prison-dev
-BuildRequires : qtbase-dev qtbase-extras mesa-dev
+BuildRequires : qtbase-dev mesa-dev
 
 %description
 # Akonadi Contacts #
@@ -44,9 +43,9 @@ data components for the akonadi-contacts package.
 %package dev
 Summary: dev components for the akonadi-contacts package.
 Group: Development
-Requires: akonadi-contacts-lib
-Requires: akonadi-contacts-data
-Provides: akonadi-contacts-devel
+Requires: akonadi-contacts-lib = %{version}-%{release}
+Requires: akonadi-contacts-data = %{version}-%{release}
+Provides: akonadi-contacts-devel = %{version}-%{release}
 
 %description dev
 dev components for the akonadi-contacts package.
@@ -55,8 +54,8 @@ dev components for the akonadi-contacts package.
 %package lib
 Summary: lib components for the akonadi-contacts package.
 Group: Libraries
-Requires: akonadi-contacts-data
-Requires: akonadi-contacts-license
+Requires: akonadi-contacts-data = %{version}-%{release}
+Requires: akonadi-contacts-license = %{version}-%{release}
 
 %description lib
 lib components for the akonadi-contacts package.
@@ -79,27 +78,27 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-18.08.0
+%setup -q -n akonadi-contacts-18.12.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1535424169
-mkdir clr-build
+export SOURCE_DATE_EPOCH=1549855479
+mkdir -p clr-build
 pushd clr-build
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1535424169
+export SOURCE_DATE_EPOCH=1549855479
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/akonadi-contacts
-cp COPYING %{buildroot}/usr/share/doc/akonadi-contacts/COPYING
-cp COPYING.BSD %{buildroot}/usr/share/doc/akonadi-contacts/COPYING.BSD
-cp COPYING.LIB %{buildroot}/usr/share/doc/akonadi-contacts/COPYING.LIB
+mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
+cp COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/COPYING
+cp COPYING.BSD %{buildroot}/usr/share/package-licenses/akonadi-contacts/COPYING.BSD
+cp COPYING.LIB %{buildroot}/usr/share/package-licenses/akonadi-contacts/COPYING.LIB
 pushd clr-build
 %make_install
 popd
@@ -134,7 +133,6 @@ popd
 /usr/share/kservicetypes5/kaddressbookimprotocol.desktop
 /usr/share/xdg/akonadi-contacts.categories
 /usr/share/xdg/akonadi-contacts.renamecategories
-/usr/share/xdg/contact-editor.categories
 
 %files dev
 %defattr(-,root,root,-)
@@ -215,19 +213,19 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.9.0
+/usr/lib64/libKF5AkonadiContact.so.5.10.2
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.9.0
+/usr/lib64/libKF5ContactEditor.so.5.10.2
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
 /usr/lib64/qt5/plugins/kcm_akonadicontact_actions.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/akonadi-contacts/COPYING
-/usr/share/doc/akonadi-contacts/COPYING.BSD
-/usr/share/doc/akonadi-contacts/COPYING.LIB
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/akonadi-contacts/COPYING
+/usr/share/package-licenses/akonadi-contacts/COPYING.BSD
+/usr/share/package-licenses/akonadi-contacts/COPYING.LIB
 
 %files locales -f akonadicontact5-serializer.lang -f akonadicontact5.lang -f kcm_akonadicontact_actions.lang
 %defattr(-,root,root,-)
