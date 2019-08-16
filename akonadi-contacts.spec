@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : akonadi-contacts
-Version  : 19.04.3
-Release  : 11
-URL      : https://download.kde.org/stable/applications/19.04.3/src/akonadi-contacts-19.04.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.04.3/src/akonadi-contacts-19.04.3.tar.xz
-Source99 : https://download.kde.org/stable/applications/19.04.3/src/akonadi-contacts-19.04.3.tar.xz.sig
+Version  : 19.08.0
+Release  : 12
+URL      : https://download.kde.org/stable/applications/19.08.0/src/akonadi-contacts-19.08.0.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.0/src/akonadi-contacts-19.08.0.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.0/src/akonadi-contacts-19.08.0.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0 LGPL-2.1
@@ -81,16 +81,17 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-19.04.3
+%setup -q -n akonadi-contacts-19.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562901956
+export SOURCE_DATE_EPOCH=1565917865
 mkdir -p clr-build
 pushd clr-build
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -104,7 +105,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1562901956
+export SOURCE_DATE_EPOCH=1565917865
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
 cp COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/COPYING
@@ -126,25 +127,9 @@ popd
 /usr/share/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
 /usr/share/kf5/akonadi/contact/data/zone.tab
 /usr/share/kf5/akonadi/contact/pics/world.jpg
-/usr/share/kservices5/akonadi/contact/aimprotocol.desktop
-/usr/share/kservices5/akonadi/contact/facebookprotocol.desktop
-/usr/share/kservices5/akonadi/contact/gaduprotocol.desktop
-/usr/share/kservices5/akonadi/contact/googletalkprotocol.desktop
-/usr/share/kservices5/akonadi/contact/groupwiseprotocol.desktop
-/usr/share/kservices5/akonadi/contact/icqprotocol.desktop
-/usr/share/kservices5/akonadi/contact/ircprotocol.desktop
-/usr/share/kservices5/akonadi/contact/jabberprotocol.desktop
-/usr/share/kservices5/akonadi/contact/meanwhileprotocol.desktop
-/usr/share/kservices5/akonadi/contact/msnprotocol.desktop
-/usr/share/kservices5/akonadi/contact/qqprotocol.desktop
-/usr/share/kservices5/akonadi/contact/skypeprotocol.desktop
-/usr/share/kservices5/akonadi/contact/smsprotocol.desktop
-/usr/share/kservices5/akonadi/contact/twitterprotocol.desktop
-/usr/share/kservices5/akonadi/contact/yahooprotocol.desktop
 /usr/share/kservices5/akonadicontact_actions.desktop
-/usr/share/kservicetypes5/kaddressbookimprotocol.desktop
-/usr/share/xdg/akonadi-contacts.categories
-/usr/share/xdg/akonadi-contacts.renamecategories
+/usr/share/qlogging-categories5/akonadi-contacts.categories
+/usr/share/qlogging-categories5/akonadi-contacts.renamecategories
 
 %files dev
 %defattr(-,root,root,-)
@@ -208,7 +193,6 @@ popd
 /usr/include/KF5/contacteditor/categorieseditabstractwidget.h
 /usr/include/KF5/contacteditor/contacteditor_export.h
 /usr/include/KF5/contacteditor/contacteditorpageplugin.h
-/usr/include/KF5/contacteditor/improtocols.h
 /usr/lib64/cmake/KF5AkonadiContact/KF5AkonadiContactConfig.cmake
 /usr/lib64/cmake/KF5AkonadiContact/KF5AkonadiContactConfigVersion.cmake
 /usr/lib64/cmake/KF5AkonadiContact/KF5AkonadiContactTargets-relwithdebinfo.cmake
@@ -225,9 +209,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.11.3
+/usr/lib64/libKF5AkonadiContact.so.5.12.0
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.11.3
+/usr/lib64/libKF5ContactEditor.so.5.12.0
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
