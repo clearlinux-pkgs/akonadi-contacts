@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : akonadi-contacts
-Version  : 19.08.1
-Release  : 13
-URL      : https://download.kde.org/stable/applications/19.08.1/src/akonadi-contacts-19.08.1.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.08.1/src/akonadi-contacts-19.08.1.tar.xz
-Source1 : https://download.kde.org/stable/applications/19.08.1/src/akonadi-contacts-19.08.1.tar.xz.sig
+Version  : 19.08.2
+Release  : 14
+URL      : https://download.kde.org/stable/applications/19.08.2/src/akonadi-contacts-19.08.2.tar.xz
+Source0  : https://download.kde.org/stable/applications/19.08.2/src/akonadi-contacts-19.08.2.tar.xz
+Source1 : https://download.kde.org/stable/applications/19.08.2/src/akonadi-contacts-19.08.2.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0 LGPL-2.1
@@ -80,14 +80,14 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-19.08.1
+%setup -q -n akonadi-contacts-19.08.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1567738661
+export SOURCE_DATE_EPOCH=1570728143
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -100,11 +100,11 @@ export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags} VERBOSE=1
+make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1567738661
+export SOURCE_DATE_EPOCH=1570728143
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
 cp COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/COPYING
@@ -208,9 +208,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.12.1
+/usr/lib64/libKF5AkonadiContact.so.5.12.2
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.12.1
+/usr/lib64/libKF5ContactEditor.so.5.12.2
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
