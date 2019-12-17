@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : akonadi-contacts
-Version  : 19.08.3
-Release  : 16
-URL      : https://download.kde.org/stable/applications/19.08.3/src/akonadi-contacts-19.08.3.tar.xz
-Source0  : https://download.kde.org/stable/applications/19.08.3/src/akonadi-contacts-19.08.3.tar.xz
-Source1 : https://download.kde.org/stable/applications/19.08.3/src/akonadi-contacts-19.08.3.tar.xz.sig
+Version  : 19.12.0
+Release  : 17
+URL      : https://download.kde.org/stable/release-service/19.12.0/src/akonadi-contacts-19.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/19.12.0/src/akonadi-contacts-19.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/19.12.0/src/akonadi-contacts-19.12.0.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0 LGPL-2.1
@@ -18,7 +18,6 @@ Requires: akonadi-contacts-lib = %{version}-%{release}
 Requires: akonadi-contacts-license = %{version}-%{release}
 Requires: akonadi-contacts-locales = %{version}-%{release}
 BuildRequires : akonadi-dev
-BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : kcontacts-dev
@@ -47,7 +46,6 @@ Group: Development
 Requires: akonadi-contacts-lib = %{version}-%{release}
 Requires: akonadi-contacts-data = %{version}-%{release}
 Provides: akonadi-contacts-devel = %{version}-%{release}
-Requires: akonadi-contacts = %{version}-%{release}
 Requires: akonadi-contacts = %{version}-%{release}
 
 %description dev
@@ -81,17 +79,17 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-19.08.3
+%setup -q -n akonadi-contacts-19.12.0
+cd %{_builddir}/akonadi-contacts-19.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1573183435
+export SOURCE_DATE_EPOCH=1576553032
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -105,12 +103,12 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1573183435
+export SOURCE_DATE_EPOCH=1576553032
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
-cp %{_builddir}/akonadi-contacts-19.08.3/COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/akonadi-contacts-19.08.3/COPYING.BSD %{buildroot}/usr/share/package-licenses/akonadi-contacts/d0f83c8198fdd5464d2373015b7b64ce7cae607e
-cp %{_builddir}/akonadi-contacts-19.08.3/COPYING.LIB %{buildroot}/usr/share/package-licenses/akonadi-contacts/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/akonadi-contacts-19.12.0/COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/7c203dee3a03037da436df03c4b25b659c073976
+cp %{_builddir}/akonadi-contacts-19.12.0/COPYING.BSD %{buildroot}/usr/share/package-licenses/akonadi-contacts/d0f83c8198fdd5464d2373015b7b64ce7cae607e
+cp %{_builddir}/akonadi-contacts-19.12.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/akonadi-contacts/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -135,6 +133,7 @@ popd
 %defattr(-,root,root,-)
 /usr/include/KF5/Akonadi/Contact/AbstractContactFormatter
 /usr/include/KF5/Akonadi/Contact/AbstractContactGroupFormatter
+/usr/include/KF5/Akonadi/Contact/AbstractEmailAddressSelectionDialog
 /usr/include/KF5/Akonadi/Contact/ContactDefaultActions
 /usr/include/KF5/Akonadi/Contact/ContactEditor
 /usr/include/KF5/Akonadi/Contact/ContactEditorDialog
@@ -155,15 +154,17 @@ popd
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionDialog
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionModel
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionWidget
+/usr/include/KF5/Akonadi/Contact/RecipientsEditorManager
+/usr/include/KF5/Akonadi/Contact/RecipientsPickerWidget
 /usr/include/KF5/Akonadi/Contact/SelectAddressBookDialog
 /usr/include/KF5/Akonadi/Contact/StandardContactActionManager
 /usr/include/KF5/Akonadi/Contact/StandardContactFormatter
 /usr/include/KF5/Akonadi/Contact/StandardContactGroupFormatter
-/usr/include/KF5/ContactEditor/AbstractAddressLocationWidget
 /usr/include/KF5/ContactEditor/CategoriesEditAbstractWidget
 /usr/include/KF5/ContactEditor/ContactEditorPagePlugin
 /usr/include/KF5/akonadi/contact/abstractcontactformatter.h
 /usr/include/KF5/akonadi/contact/abstractcontactgroupformatter.h
+/usr/include/KF5/akonadi/contact/abstractemailaddressselectiondialog.h
 /usr/include/KF5/akonadi/contact/akonadi-contact_export.h
 /usr/include/KF5/akonadi/contact/contactdefaultactions.h
 /usr/include/KF5/akonadi/contact/contacteditor.h
@@ -185,11 +186,12 @@ popd
 /usr/include/KF5/akonadi/contact/emailaddressselectiondialog.h
 /usr/include/KF5/akonadi/contact/emailaddressselectionmodel.h
 /usr/include/KF5/akonadi/contact/emailaddressselectionwidget.h
+/usr/include/KF5/akonadi/contact/recipientseditormanager.h
+/usr/include/KF5/akonadi/contact/recipientspickerwidget.h
 /usr/include/KF5/akonadi/contact/selectaddressbookdialog.h
 /usr/include/KF5/akonadi/contact/standardcontactactionmanager.h
 /usr/include/KF5/akonadi/contact/standardcontactformatter.h
 /usr/include/KF5/akonadi/contact/standardcontactgroupformatter.h
-/usr/include/KF5/contacteditor/abstractaddresslocationwidget.h
 /usr/include/KF5/contacteditor/categorieseditabstractwidget.h
 /usr/include/KF5/contacteditor/contacteditor_export.h
 /usr/include/KF5/contacteditor/contacteditorpageplugin.h
@@ -209,9 +211,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.12.3
+/usr/lib64/libKF5AkonadiContact.so.5.13.0
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.12.3
+/usr/lib64/libKF5ContactEditor.so.5.13.0
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
