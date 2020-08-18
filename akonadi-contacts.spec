@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : akonadi-contacts
-Version  : 20.04.2
-Release  : 23
-URL      : https://download.kde.org/stable/release-service/20.04.2/src/akonadi-contacts-20.04.2.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.2/src/akonadi-contacts-20.04.2.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.2/src/akonadi-contacts-20.04.2.tar.xz.sig
+Version  : 20.08.0
+Release  : 24
+URL      : https://download.kde.org/stable/release-service/20.08.0/src/akonadi-contacts-20.08.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.08.0/src/akonadi-contacts-20.08.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.08.0/src/akonadi-contacts-20.08.0.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
 License  : BSD-2-Clause GPL-2.0 LGPL-2.1
@@ -91,15 +91,15 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-20.04.2
-cd %{_builddir}/akonadi-contacts-20.04.2
+%setup -q -n akonadi-contacts-20.08.0
+cd %{_builddir}/akonadi-contacts-20.08.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1591909106
+export SOURCE_DATE_EPOCH=1597731696
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -111,16 +111,16 @@ export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
-make  %{?_smp_mflags}  VERBOSE=1
+make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1591909106
+export SOURCE_DATE_EPOCH=1597731696
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
-cp %{_builddir}/akonadi-contacts-20.04.2/COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/akonadi-contacts-20.04.2/COPYING.BSD %{buildroot}/usr/share/package-licenses/akonadi-contacts/d0f83c8198fdd5464d2373015b7b64ce7cae607e
-cp %{_builddir}/akonadi-contacts-20.04.2/COPYING.LIB %{buildroot}/usr/share/package-licenses/akonadi-contacts/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/akonadi-contacts-20.08.0/COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/7c203dee3a03037da436df03c4b25b659c073976
+cp %{_builddir}/akonadi-contacts-20.08.0/COPYING.BSD %{buildroot}/usr/share/package-licenses/akonadi-contacts/d0f83c8198fdd5464d2373015b7b64ce7cae607e
+cp %{_builddir}/akonadi-contacts-20.08.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/akonadi-contacts/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -146,6 +146,9 @@ popd
 /usr/include/KF5/Akonadi/Contact/AbstractContactFormatter
 /usr/include/KF5/Akonadi/Contact/AbstractContactGroupFormatter
 /usr/include/KF5/Akonadi/Contact/AbstractEmailAddressSelectionDialog
+/usr/include/KF5/Akonadi/Contact/AddContactJob
+/usr/include/KF5/Akonadi/Contact/AddEmailAddressJob
+/usr/include/KF5/Akonadi/Contact/AddEmailDisplayJob
 /usr/include/KF5/Akonadi/Contact/ContactDefaultActions
 /usr/include/KF5/Akonadi/Contact/ContactEditor
 /usr/include/KF5/Akonadi/Contact/ContactEditorDialog
@@ -166,6 +169,7 @@ popd
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionDialog
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionModel
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionWidget
+/usr/include/KF5/Akonadi/Contact/OpenEmailAddressJob
 /usr/include/KF5/Akonadi/Contact/RecipientsEditorManager
 /usr/include/KF5/Akonadi/Contact/RecipientsPickerWidget
 /usr/include/KF5/Akonadi/Contact/SelectAddressBookDialog
@@ -177,6 +181,9 @@ popd
 /usr/include/KF5/akonadi/contact/abstractcontactformatter.h
 /usr/include/KF5/akonadi/contact/abstractcontactgroupformatter.h
 /usr/include/KF5/akonadi/contact/abstractemailaddressselectiondialog.h
+/usr/include/KF5/akonadi/contact/addcontactjob.h
+/usr/include/KF5/akonadi/contact/addemailaddressjob.h
+/usr/include/KF5/akonadi/contact/addemaildisplayjob.h
 /usr/include/KF5/akonadi/contact/akonadi-contact_export.h
 /usr/include/KF5/akonadi/contact/contactdefaultactions.h
 /usr/include/KF5/akonadi/contact/contacteditor.h
@@ -198,6 +205,7 @@ popd
 /usr/include/KF5/akonadi/contact/emailaddressselectiondialog.h
 /usr/include/KF5/akonadi/contact/emailaddressselectionmodel.h
 /usr/include/KF5/akonadi/contact/emailaddressselectionwidget.h
+/usr/include/KF5/akonadi/contact/openemailaddressjob.h
 /usr/include/KF5/akonadi/contact/recipientseditormanager.h
 /usr/include/KF5/akonadi/contact/recipientspickerwidget.h
 /usr/include/KF5/akonadi/contact/selectaddressbookdialog.h
@@ -223,9 +231,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.14.2
+/usr/lib64/libKF5AkonadiContact.so.5.15.0
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.14.2
+/usr/lib64/libKF5ContactEditor.so.5.15.0
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
