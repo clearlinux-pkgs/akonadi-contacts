@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : akonadi-contacts
-Version  : 20.08.3
-Release  : 26
-URL      : https://download.kde.org/stable/release-service/20.08.3/src/akonadi-contacts-20.08.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.08.3/src/akonadi-contacts-20.08.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.08.3/src/akonadi-contacts-20.08.3.tar.xz.sig
+Version  : 20.12.0
+Release  : 27
+URL      : https://download.kde.org/stable/release-service/20.12.0/src/akonadi-contacts-20.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.12.0/src/akonadi-contacts-20.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.12.0/src/akonadi-contacts-20.12.0.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
-License  : BSD-2-Clause GPL-2.0 LGPL-2.1
+License  : GPL-2.0 LGPL-2.0
 Requires: akonadi-contacts-data = %{version}-%{release}
 Requires: akonadi-contacts-lib = %{version}-%{release}
 Requires: akonadi-contacts-license = %{version}-%{release}
@@ -21,6 +21,10 @@ BuildRequires : akonadi-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules-data
+BuildRequires : gpgme-dev
+BuildRequires : gpgme-extras
+BuildRequires : grantlee-dev
+BuildRequires : grantleetheme-dev
 BuildRequires : kcodecs-dev
 BuildRequires : kcompletion-dev
 BuildRequires : kconfig-dev
@@ -33,6 +37,7 @@ BuildRequires : kservice-dev
 BuildRequires : ktextwidgets-dev
 BuildRequires : kwidgetsaddons-dev
 BuildRequires : kxmlgui-dev
+BuildRequires : libkleo-dev
 BuildRequires : prison-dev
 BuildRequires : qtbase-dev
 BuildRequires : qtbase-dev mesa-dev
@@ -91,15 +96,15 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-20.08.3
-cd %{_builddir}/akonadi-contacts-20.08.3
+%setup -q -n akonadi-contacts-20.12.0
+cd %{_builddir}/akonadi-contacts-20.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604608478
+export SOURCE_DATE_EPOCH=1607737610
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -115,12 +120,11 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1604608478
+export SOURCE_DATE_EPOCH=1607737610
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
-cp %{_builddir}/akonadi-contacts-20.08.3/COPYING %{buildroot}/usr/share/package-licenses/akonadi-contacts/7c203dee3a03037da436df03c4b25b659c073976
-cp %{_builddir}/akonadi-contacts-20.08.3/COPYING.BSD %{buildroot}/usr/share/package-licenses/akonadi-contacts/d0f83c8198fdd5464d2373015b7b64ce7cae607e
-cp %{_builddir}/akonadi-contacts-20.08.3/COPYING.LIB %{buildroot}/usr/share/package-licenses/akonadi-contacts/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/akonadi-contacts-20.12.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/akonadi-contacts-20.12.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
 pushd clr-build
 %make_install
 popd
@@ -152,6 +156,7 @@ popd
 /usr/include/KF5/Akonadi/Contact/ContactDefaultActions
 /usr/include/KF5/Akonadi/Contact/ContactEditor
 /usr/include/KF5/Akonadi/Contact/ContactEditorDialog
+/usr/include/KF5/Akonadi/Contact/ContactGrantleeWrapper
 /usr/include/KF5/Akonadi/Contact/ContactGroupEditor
 /usr/include/KF5/Akonadi/Contact/ContactGroupEditorDialog
 /usr/include/KF5/Akonadi/Contact/ContactGroupExpandJob
@@ -169,6 +174,10 @@ popd
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionDialog
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionModel
 /usr/include/KF5/Akonadi/Contact/EmailAddressSelectionWidget
+/usr/include/KF5/Akonadi/Contact/GrantleeContactFormatter
+/usr/include/KF5/Akonadi/Contact/GrantleeContactGroupFormatter
+/usr/include/KF5/Akonadi/Contact/GrantleeContactViewer
+/usr/include/KF5/Akonadi/Contact/GrantleePrint
 /usr/include/KF5/Akonadi/Contact/OpenEmailAddressJob
 /usr/include/KF5/Akonadi/Contact/RecipientsEditorManager
 /usr/include/KF5/Akonadi/Contact/RecipientsPickerWidget
@@ -188,6 +197,7 @@ popd
 /usr/include/KF5/akonadi/contact/contactdefaultactions.h
 /usr/include/KF5/akonadi/contact/contacteditor.h
 /usr/include/KF5/akonadi/contact/contacteditordialog.h
+/usr/include/KF5/akonadi/contact/contactgrantleewrapper.h
 /usr/include/KF5/akonadi/contact/contactgroupeditor.h
 /usr/include/KF5/akonadi/contact/contactgroupeditordialog.h
 /usr/include/KF5/akonadi/contact/contactgroupexpandjob.h
@@ -205,6 +215,10 @@ popd
 /usr/include/KF5/akonadi/contact/emailaddressselectiondialog.h
 /usr/include/KF5/akonadi/contact/emailaddressselectionmodel.h
 /usr/include/KF5/akonadi/contact/emailaddressselectionwidget.h
+/usr/include/KF5/akonadi/contact/grantleecontactformatter.h
+/usr/include/KF5/akonadi/contact/grantleecontactgroupformatter.h
+/usr/include/KF5/akonadi/contact/grantleecontactviewer.h
+/usr/include/KF5/akonadi/contact/grantleeprint.h
 /usr/include/KF5/akonadi/contact/openemailaddressjob.h
 /usr/include/KF5/akonadi/contact/recipientseditormanager.h
 /usr/include/KF5/akonadi/contact/recipientspickerwidget.h
@@ -231,9 +245,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.15.3
+/usr/lib64/libKF5AkonadiContact.so.5.16.0
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.15.3
+/usr/lib64/libKF5ContactEditor.so.5.16.0
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
@@ -241,9 +255,8 @@ popd
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/akonadi-contacts/7c203dee3a03037da436df03c4b25b659c073976
-/usr/share/package-licenses/akonadi-contacts/9a1929f4700d2407c70b507b3b2aaf6226a9543c
-/usr/share/package-licenses/akonadi-contacts/d0f83c8198fdd5464d2373015b7b64ce7cae607e
+/usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
+/usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files locales -f akonadicontact5-serializer.lang -f akonadicontact5.lang -f kcm_akonadicontact_actions.lang
 %defattr(-,root,root,-)
