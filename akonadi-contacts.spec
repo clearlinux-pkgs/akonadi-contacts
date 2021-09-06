@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : akonadi-contacts
-Version  : 21.04.2
-Release  : 31
-URL      : https://download.kde.org/stable/release-service/21.04.2/src/akonadi-contacts-21.04.2.tar.xz
-Source0  : https://download.kde.org/stable/release-service/21.04.2/src/akonadi-contacts-21.04.2.tar.xz
-Source1  : https://download.kde.org/stable/release-service/21.04.2/src/akonadi-contacts-21.04.2.tar.xz.sig
+Version  : 21.08.1
+Release  : 32
+URL      : https://download.kde.org/stable/release-service/21.08.1/src/akonadi-contacts-21.08.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/21.08.1/src/akonadi-contacts-21.08.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/21.08.1/src/akonadi-contacts-21.08.1.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GPL-2.0 LGPL-2.0
@@ -25,6 +25,7 @@ BuildRequires : gpgme-dev
 BuildRequires : gpgme-extras
 BuildRequires : grantlee-dev
 BuildRequires : grantleetheme-dev
+BuildRequires : kcmutils-dev
 BuildRequires : kcompletion-dev
 BuildRequires : kconfig-dev
 BuildRequires : kcontacts-dev
@@ -38,7 +39,6 @@ BuildRequires : kwidgetsaddons-dev
 BuildRequires : kxmlgui-dev
 BuildRequires : libkleo-dev
 BuildRequires : prison-dev
-BuildRequires : qtbase-dev
 BuildRequires : qtbase-dev mesa-dev
 
 %description
@@ -95,37 +95,38 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-21.04.2
-cd %{_builddir}/akonadi-contacts-21.04.2
+%setup -q -n akonadi-contacts-21.08.1
+cd %{_builddir}/akonadi-contacts-21.08.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623352593
+export SOURCE_DATE_EPOCH=1630963161
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1623352593
+export SOURCE_DATE_EPOCH=1630963161
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
-cp %{_builddir}/akonadi-contacts-21.04.2/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/29fb05b49e12a380545499938c4879440bd8851e
-cp %{_builddir}/akonadi-contacts-21.04.2/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/akonadi-contacts-21.04.2/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/akonadi-contacts-21.04.2/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/akonadi-contacts-21.08.1/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/29fb05b49e12a380545499938c4879440bd8851e
+cp %{_builddir}/akonadi-contacts-21.08.1/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/akonadi-contacts-21.08.1/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/akonadi-contacts-21.08.1/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/akonadi-contacts-21.08.1/metainfo.yaml.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
 pushd clr-build
 %make_install
 popd
@@ -246,18 +247,19 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.17.2
+/usr/lib64/libKF5AkonadiContact.so.5.18.1
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.17.2
+/usr/lib64/libKF5ContactEditor.so.5.18.1
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
-/usr/lib64/qt5/plugins/kcm_akonadicontact_actions.so
+/usr/lib64/qt5/plugins/pim/kcms/kaddressbook/kcm_akonadicontact_actions.so
 
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
 /usr/share/package-licenses/akonadi-contacts/29fb05b49e12a380545499938c4879440bd8851e
+/usr/share/package-licenses/akonadi-contacts/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
 /usr/share/package-licenses/akonadi-contacts/8287b608d3fa40ef401339fd907ca1260c964123
 /usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
