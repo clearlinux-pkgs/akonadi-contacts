@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : akonadi-contacts
-Version  : 21.12.3
-Release  : 39
-URL      : https://download.kde.org/stable/release-service/21.12.3/src/akonadi-contacts-21.12.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/21.12.3/src/akonadi-contacts-21.12.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/21.12.3/src/akonadi-contacts-21.12.3.tar.xz.sig
+Version  : 22.04.0
+Release  : 40
+URL      : https://download.kde.org/stable/release-service/22.04.0/src/akonadi-contacts-22.04.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.04.0/src/akonadi-contacts-22.04.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.04.0/src/akonadi-contacts-22.04.0.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GPL-2.0 LGPL-2.0
@@ -21,8 +21,6 @@ BuildRequires : akonadi-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : extra-cmake-modules-data
-BuildRequires : gpgme-dev
-BuildRequires : gpgme-extras
 BuildRequires : grantlee-dev
 BuildRequires : grantleetheme-dev
 BuildRequires : kcmutils-dev
@@ -38,16 +36,10 @@ BuildRequires : kservice-dev
 BuildRequires : ktextwidgets-dev
 BuildRequires : kwidgetsaddons-dev
 BuildRequires : kxmlgui-dev
-BuildRequires : libkleo-dev
 BuildRequires : prison-dev
-BuildRequires : qtbase-dev mesa-dev
 
 %description
-# Akonadi Contacts #
-Akonadi Contacts is a library that effectively bridges the type-agnostic API of
-the Akonadi client libraries and the domain-specific KContacts library. It provides
-jobs, models and other helpers to make working with contacts and addressbooks through
-Akonadi easier.
+SPDX-License-Identifier: CC0-1.0
 
 %package data
 Summary: data components for the akonadi-contacts package.
@@ -96,15 +88,15 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-21.12.3
-cd %{_builddir}/akonadi-contacts-21.12.3
+%setup -q -n akonadi-contacts-22.04.0
+cd %{_builddir}/akonadi-contacts-22.04.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1646547224
+export SOURCE_DATE_EPOCH=1650677946
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -120,14 +112,15 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1646547224
+export SOURCE_DATE_EPOCH=1650677946
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
-cp %{_builddir}/akonadi-contacts-21.12.3/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/29fb05b49e12a380545499938c4879440bd8851e
-cp %{_builddir}/akonadi-contacts-21.12.3/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/akonadi-contacts-21.12.3/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/akonadi-contacts-21.12.3/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
-cp %{_builddir}/akonadi-contacts-21.12.3/metainfo.yaml.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
+cp %{_builddir}/akonadi-contacts-22.04.0/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+cp %{_builddir}/akonadi-contacts-22.04.0/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/akonadi-contacts-22.04.0/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/akonadi-contacts-22.04.0/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/akonadi-contacts-22.04.0/README.md.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/cadc9e08cb956c041f87922de84b9206d9bbffb2
+cp %{_builddir}/akonadi-contacts-22.04.0/metainfo.yaml.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
 pushd clr-build
 %make_install
 popd
@@ -150,86 +143,88 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/KF5/Akonadi/Contact/AbstractContactFormatter
-/usr/include/KF5/Akonadi/Contact/AbstractContactGroupFormatter
-/usr/include/KF5/Akonadi/Contact/AbstractEmailAddressSelectionDialog
-/usr/include/KF5/Akonadi/Contact/AddContactJob
-/usr/include/KF5/Akonadi/Contact/AddEmailAddressJob
-/usr/include/KF5/Akonadi/Contact/AddEmailDisplayJob
-/usr/include/KF5/Akonadi/Contact/ContactDefaultActions
-/usr/include/KF5/Akonadi/Contact/ContactEditor
-/usr/include/KF5/Akonadi/Contact/ContactEditorDialog
-/usr/include/KF5/Akonadi/Contact/ContactGrantleeWrapper
-/usr/include/KF5/Akonadi/Contact/ContactGroupEditor
-/usr/include/KF5/Akonadi/Contact/ContactGroupEditorDialog
-/usr/include/KF5/Akonadi/Contact/ContactGroupExpandJob
-/usr/include/KF5/Akonadi/Contact/ContactGroupSearchJob
-/usr/include/KF5/Akonadi/Contact/ContactGroupViewer
-/usr/include/KF5/Akonadi/Contact/ContactParts
-/usr/include/KF5/Akonadi/Contact/ContactSearchJob
-/usr/include/KF5/Akonadi/Contact/ContactViewer
-/usr/include/KF5/Akonadi/Contact/ContactViewerDialog
-/usr/include/KF5/Akonadi/Contact/ContactsFilterProxyModel
-/usr/include/KF5/Akonadi/Contact/ContactsTreeModel
-/usr/include/KF5/Akonadi/Contact/EmailAddressRequester
-/usr/include/KF5/Akonadi/Contact/EmailAddressSelection
-/usr/include/KF5/Akonadi/Contact/EmailAddressSelectionDialog
-/usr/include/KF5/Akonadi/Contact/EmailAddressSelectionModel
-/usr/include/KF5/Akonadi/Contact/EmailAddressSelectionWidget
-/usr/include/KF5/Akonadi/Contact/GrantleeContactFormatter
-/usr/include/KF5/Akonadi/Contact/GrantleeContactGroupFormatter
-/usr/include/KF5/Akonadi/Contact/GrantleeContactViewer
-/usr/include/KF5/Akonadi/Contact/GrantleePrint
-/usr/include/KF5/Akonadi/Contact/OpenEmailAddressJob
-/usr/include/KF5/Akonadi/Contact/RecipientsEditorManager
-/usr/include/KF5/Akonadi/Contact/RecipientsPickerWidget
-/usr/include/KF5/Akonadi/Contact/SelectAddressBookDialog
-/usr/include/KF5/Akonadi/Contact/StandardContactActionManager
-/usr/include/KF5/Akonadi/Contact/StandardContactFormatter
-/usr/include/KF5/Akonadi/Contact/StandardContactGroupFormatter
-/usr/include/KF5/ContactEditor/CategoriesEditAbstractWidget
-/usr/include/KF5/ContactEditor/ContactEditorPagePlugin
-/usr/include/KF5/akonadi/contact/abstractcontactformatter.h
-/usr/include/KF5/akonadi/contact/abstractcontactgroupformatter.h
-/usr/include/KF5/akonadi/contact/abstractemailaddressselectiondialog.h
-/usr/include/KF5/akonadi/contact/addcontactjob.h
-/usr/include/KF5/akonadi/contact/addemailaddressjob.h
-/usr/include/KF5/akonadi/contact/addemaildisplayjob.h
-/usr/include/KF5/akonadi/contact/akonadi-contact_export.h
-/usr/include/KF5/akonadi/contact/contactdefaultactions.h
-/usr/include/KF5/akonadi/contact/contacteditor.h
-/usr/include/KF5/akonadi/contact/contacteditordialog.h
-/usr/include/KF5/akonadi/contact/contactgrantleewrapper.h
-/usr/include/KF5/akonadi/contact/contactgroupeditor.h
-/usr/include/KF5/akonadi/contact/contactgroupeditordialog.h
-/usr/include/KF5/akonadi/contact/contactgroupexpandjob.h
-/usr/include/KF5/akonadi/contact/contactgroupsearchjob.h
-/usr/include/KF5/akonadi/contact/contactgroupviewer.h
-/usr/include/KF5/akonadi/contact/contactparts.h
-/usr/include/KF5/akonadi/contact/contactsearchjob.h
-/usr/include/KF5/akonadi/contact/contactsfilterproxymodel.h
-/usr/include/KF5/akonadi/contact/contactstreemodel.h
-/usr/include/KF5/akonadi/contact/contactviewer.h
-/usr/include/KF5/akonadi/contact/contactviewerdialog.h
-/usr/include/KF5/akonadi/contact/emailaddressrequester.h
-/usr/include/KF5/akonadi/contact/emailaddressselection.h
-/usr/include/KF5/akonadi/contact/emailaddressselectiondialog.h
-/usr/include/KF5/akonadi/contact/emailaddressselectionmodel.h
-/usr/include/KF5/akonadi/contact/emailaddressselectionwidget.h
-/usr/include/KF5/akonadi/contact/grantleecontactformatter.h
-/usr/include/KF5/akonadi/contact/grantleecontactgroupformatter.h
-/usr/include/KF5/akonadi/contact/grantleecontactviewer.h
-/usr/include/KF5/akonadi/contact/grantleeprint.h
-/usr/include/KF5/akonadi/contact/openemailaddressjob.h
-/usr/include/KF5/akonadi/contact/recipientseditormanager.h
-/usr/include/KF5/akonadi/contact/recipientspickerwidget.h
-/usr/include/KF5/akonadi/contact/selectaddressbookdialog.h
-/usr/include/KF5/akonadi/contact/standardcontactactionmanager.h
-/usr/include/KF5/akonadi/contact/standardcontactformatter.h
-/usr/include/KF5/akonadi/contact/standardcontactgroupformatter.h
-/usr/include/KF5/contacteditor/categorieseditabstractwidget.h
-/usr/include/KF5/contacteditor/contacteditor_export.h
-/usr/include/KF5/contacteditor/contacteditorpageplugin.h
+/usr/include/KF5/AkonadiContact/Akonadi/AbstractContactFormatter
+/usr/include/KF5/AkonadiContact/Akonadi/AbstractContactGroupFormatter
+/usr/include/KF5/AkonadiContact/Akonadi/AbstractEmailAddressSelectionDialog
+/usr/include/KF5/AkonadiContact/Akonadi/AddContactJob
+/usr/include/KF5/AkonadiContact/Akonadi/AddEmailAddressJob
+/usr/include/KF5/AkonadiContact/Akonadi/AddEmailDisplayJob
+/usr/include/KF5/AkonadiContact/Akonadi/ContactDefaultActions
+/usr/include/KF5/AkonadiContact/Akonadi/ContactEditor
+/usr/include/KF5/AkonadiContact/Akonadi/ContactEditorDialog
+/usr/include/KF5/AkonadiContact/Akonadi/ContactGrantleeWrapper
+/usr/include/KF5/AkonadiContact/Akonadi/ContactGroupEditor
+/usr/include/KF5/AkonadiContact/Akonadi/ContactGroupEditorDialog
+/usr/include/KF5/AkonadiContact/Akonadi/ContactGroupExpandJob
+/usr/include/KF5/AkonadiContact/Akonadi/ContactGroupSearchJob
+/usr/include/KF5/AkonadiContact/Akonadi/ContactGroupViewer
+/usr/include/KF5/AkonadiContact/Akonadi/ContactParts
+/usr/include/KF5/AkonadiContact/Akonadi/ContactSearchJob
+/usr/include/KF5/AkonadiContact/Akonadi/ContactViewer
+/usr/include/KF5/AkonadiContact/Akonadi/ContactViewerDialog
+/usr/include/KF5/AkonadiContact/Akonadi/ContactsFilterProxyModel
+/usr/include/KF5/AkonadiContact/Akonadi/ContactsTreeModel
+/usr/include/KF5/AkonadiContact/Akonadi/EmailAddressRequester
+/usr/include/KF5/AkonadiContact/Akonadi/EmailAddressSelection
+/usr/include/KF5/AkonadiContact/Akonadi/EmailAddressSelectionDialog
+/usr/include/KF5/AkonadiContact/Akonadi/EmailAddressSelectionModel
+/usr/include/KF5/AkonadiContact/Akonadi/EmailAddressSelectionWidget
+/usr/include/KF5/AkonadiContact/Akonadi/GrantleeContactFormatter
+/usr/include/KF5/AkonadiContact/Akonadi/GrantleeContactGroupFormatter
+/usr/include/KF5/AkonadiContact/Akonadi/GrantleeContactViewer
+/usr/include/KF5/AkonadiContact/Akonadi/GrantleePrint
+/usr/include/KF5/AkonadiContact/Akonadi/OpenEmailAddressJob
+/usr/include/KF5/AkonadiContact/Akonadi/RecipientsEditorManager
+/usr/include/KF5/AkonadiContact/Akonadi/RecipientsPickerWidget
+/usr/include/KF5/AkonadiContact/Akonadi/SelectAddressBookDialog
+/usr/include/KF5/AkonadiContact/Akonadi/StandardContactActionManager
+/usr/include/KF5/AkonadiContact/Akonadi/StandardContactFormatter
+/usr/include/KF5/AkonadiContact/Akonadi/StandardContactGroupFormatter
+/usr/include/KF5/AkonadiContact/akonadi-contact_version.h
+/usr/include/KF5/AkonadiContact/akonadi/abstractcontactformatter.h
+/usr/include/KF5/AkonadiContact/akonadi/abstractcontactgroupformatter.h
+/usr/include/KF5/AkonadiContact/akonadi/abstractemailaddressselectiondialog.h
+/usr/include/KF5/AkonadiContact/akonadi/addcontactjob.h
+/usr/include/KF5/AkonadiContact/akonadi/addemailaddressjob.h
+/usr/include/KF5/AkonadiContact/akonadi/addemaildisplayjob.h
+/usr/include/KF5/AkonadiContact/akonadi/akonadi-contact_export.h
+/usr/include/KF5/AkonadiContact/akonadi/contactdefaultactions.h
+/usr/include/KF5/AkonadiContact/akonadi/contacteditor.h
+/usr/include/KF5/AkonadiContact/akonadi/contacteditordialog.h
+/usr/include/KF5/AkonadiContact/akonadi/contactgrantleewrapper.h
+/usr/include/KF5/AkonadiContact/akonadi/contactgroupeditor.h
+/usr/include/KF5/AkonadiContact/akonadi/contactgroupeditordialog.h
+/usr/include/KF5/AkonadiContact/akonadi/contactgroupexpandjob.h
+/usr/include/KF5/AkonadiContact/akonadi/contactgroupsearchjob.h
+/usr/include/KF5/AkonadiContact/akonadi/contactgroupviewer.h
+/usr/include/KF5/AkonadiContact/akonadi/contactparts.h
+/usr/include/KF5/AkonadiContact/akonadi/contactsearchjob.h
+/usr/include/KF5/AkonadiContact/akonadi/contactsfilterproxymodel.h
+/usr/include/KF5/AkonadiContact/akonadi/contactstreemodel.h
+/usr/include/KF5/AkonadiContact/akonadi/contactviewer.h
+/usr/include/KF5/AkonadiContact/akonadi/contactviewerdialog.h
+/usr/include/KF5/AkonadiContact/akonadi/emailaddressrequester.h
+/usr/include/KF5/AkonadiContact/akonadi/emailaddressselection.h
+/usr/include/KF5/AkonadiContact/akonadi/emailaddressselectiondialog.h
+/usr/include/KF5/AkonadiContact/akonadi/emailaddressselectionmodel.h
+/usr/include/KF5/AkonadiContact/akonadi/emailaddressselectionwidget.h
+/usr/include/KF5/AkonadiContact/akonadi/grantleecontactformatter.h
+/usr/include/KF5/AkonadiContact/akonadi/grantleecontactgroupformatter.h
+/usr/include/KF5/AkonadiContact/akonadi/grantleecontactviewer.h
+/usr/include/KF5/AkonadiContact/akonadi/grantleeprint.h
+/usr/include/KF5/AkonadiContact/akonadi/openemailaddressjob.h
+/usr/include/KF5/AkonadiContact/akonadi/recipientseditormanager.h
+/usr/include/KF5/AkonadiContact/akonadi/recipientspickerwidget.h
+/usr/include/KF5/AkonadiContact/akonadi/selectaddressbookdialog.h
+/usr/include/KF5/AkonadiContact/akonadi/standardcontactactionmanager.h
+/usr/include/KF5/AkonadiContact/akonadi/standardcontactformatter.h
+/usr/include/KF5/AkonadiContact/akonadi/standardcontactgroupformatter.h
+/usr/include/KF5/AkonadiContactEditor/Akonadi/CategoriesEditAbstractWidget
+/usr/include/KF5/AkonadiContactEditor/Akonadi/ContactEditorPagePlugin
+/usr/include/KF5/AkonadiContactEditor/akonadi-contact-editor_version.h
+/usr/include/KF5/AkonadiContactEditor/akonadi/categorieseditabstractwidget.h
+/usr/include/KF5/AkonadiContactEditor/akonadi/contacteditor_export.h
+/usr/include/KF5/AkonadiContactEditor/akonadi/contacteditorpageplugin.h
 /usr/lib64/cmake/KF5AkonadiContact/KF5AkonadiContactConfig.cmake
 /usr/lib64/cmake/KF5AkonadiContact/KF5AkonadiContactConfigVersion.cmake
 /usr/lib64/cmake/KF5AkonadiContact/KF5AkonadiContactTargets-relwithdebinfo.cmake
@@ -246,9 +241,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.19.3
+/usr/lib64/libKF5AkonadiContact.so.5.20.0
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.19.3
+/usr/lib64/libKF5ContactEditor.so.5.20.0
 /usr/lib64/qt5/plugins/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
@@ -257,9 +252,10 @@ popd
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/akonadi-contacts/20079e8f79713dce80ab09774505773c926afa2a
-/usr/share/package-licenses/akonadi-contacts/29fb05b49e12a380545499938c4879440bd8851e
 /usr/share/package-licenses/akonadi-contacts/7ff5a7dd2c915b2b34329c892e06917c5f82f3a4
 /usr/share/package-licenses/akonadi-contacts/8287b608d3fa40ef401339fd907ca1260c964123
+/usr/share/package-licenses/akonadi-contacts/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+/usr/share/package-licenses/akonadi-contacts/cadc9e08cb956c041f87922de84b9206d9bbffb2
 /usr/share/package-licenses/akonadi-contacts/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 
 %files locales -f akonadicontact5-serializer.lang -f akonadicontact5.lang -f kcm_akonadicontact_actions.lang
