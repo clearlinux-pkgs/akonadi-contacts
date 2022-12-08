@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xBB463350D6EF31EF (heiko@shruuf.de)
 #
 Name     : akonadi-contacts
-Version  : 22.08.3
-Release  : 47
-URL      : https://download.kde.org/stable/release-service/22.08.3/src/akonadi-contacts-22.08.3.tar.xz
-Source0  : https://download.kde.org/stable/release-service/22.08.3/src/akonadi-contacts-22.08.3.tar.xz
-Source1  : https://download.kde.org/stable/release-service/22.08.3/src/akonadi-contacts-22.08.3.tar.xz.sig
+Version  : 22.12.0
+Release  : 48
+URL      : https://download.kde.org/stable/release-service/22.12.0/src/akonadi-contacts-22.12.0.tar.xz
+Source0  : https://download.kde.org/stable/release-service/22.12.0/src/akonadi-contacts-22.12.0.tar.xz
+Source1  : https://download.kde.org/stable/release-service/22.12.0/src/akonadi-contacts-22.12.0.tar.xz.sig
 Summary  : Libraries and daemons to implement Contact Management in Akonadi
 Group    : Development/Tools
 License  : BSD-3-Clause CC0-1.0 GPL-2.0 LGPL-2.0
@@ -88,15 +88,15 @@ locales components for the akonadi-contacts package.
 
 
 %prep
-%setup -q -n akonadi-contacts-22.08.3
-cd %{_builddir}/akonadi-contacts-22.08.3
+%setup -q -n akonadi-contacts-22.12.0
+cd %{_builddir}/akonadi-contacts-22.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1667886786
+export SOURCE_DATE_EPOCH=1670542008
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -112,7 +112,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1667886786
+export SOURCE_DATE_EPOCH=1670542008
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/akonadi-contacts
 cp %{_builddir}/akonadi-contacts-%{version}/CMakePresets.json.license %{buildroot}/usr/share/package-licenses/akonadi-contacts/c085897bc39e05746ffd2d889a6e84ff1b7ae2d9 || :
@@ -241,9 +241,9 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5AkonadiContact.so.5
-/usr/lib64/libKF5AkonadiContact.so.5.21.3
+/usr/lib64/libKF5AkonadiContact.so.5.22.0
 /usr/lib64/libKF5ContactEditor.so.5
-/usr/lib64/libKF5ContactEditor.so.5.21.3
+/usr/lib64/libKF5ContactEditor.so.5.22.0
 /usr/lib64/qt5/plugins/akonadi_serializer_addressee.so
 /usr/lib64/qt5/plugins/akonadi_serializer_contactgroup.so
 /usr/lib64/qt5/plugins/pim5/akonadi/contacts/plugins/categorieseditwidgetplugin.so
